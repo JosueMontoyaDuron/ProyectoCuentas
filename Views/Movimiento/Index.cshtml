@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Cuentas.Models.Movimiento>
+
+@{
+    ViewData["Title"] = "Lista de Movimientos";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="display-5 text-secondary">Historial de Movimientos</h1>
+        <a asp-action="Create" class="btn btn-success btn-lg shadow-sm">
+            <i class="bi bi-plus-circle-fill"></i> Registrar Nuevo Movimiento
+        </a>
+    </div>
+
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-hover table-striped table-bordered align-middle">
+            <thead class="table-light border-bottom border-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tipo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Concepto)
+                    </th>
+                    <th class="text-end">
+                        @Html.DisplayNameFor(model => model.Monto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fecha)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(model => model.IdCuenta)
+                    </th>
+                    <th class="text-center">
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    // Asignar clase de fila según el tipo de movimiento
+                    var rowClass = item.Tipo == 2 ? "table-danger-light" : "table-success-light";
+
+                    <tr class="@rowClass">
+                        <td class="text-center">
+                            @if (item.Tipo == 1) // Deposito
+                            {
+                                <span class="badge bg-success"><i class="bi bi-arrow-up-right-circle"></i> Depósito</span>
+                            }
+                            else if (item.Tipo == 2) // Retiro
+                            {
+                                <span class="badge bg-danger"><i class="bi bi-arrow-down-left-circle"></i> Retiro</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">@Html.DisplayFor(modelItem => item.Tipo)</span>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Concepto)
+                        </td>
+                        <td class="text-end fw-bold @(item.Tipo == 2 ? "text-danger" : "text-success")">
+                            @Html.DisplayFor(modelItem => item.Monto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fecha)
+                        </td>
+                        <td class="text-center">
+                            <span class="badge bg-dark">@Html.DisplayFor(modelItem => item.IdCuenta)</span>
+                        </td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm" role="group">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">
+                                    <i class="bi bi-pencil">Editar</i>
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info text-white">
+                                    <i class="bi bi-info-circle">Detalles</i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">
+                                    <i class="bi bi-trash">Eliminar</i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .table-danger-light {
+        --bs-table-bg: #ffebeb; /* Rojo muy claro */
+    }
+
+    .table-success-light {
+        --bs-table-bg: #e6ffe6; /* Verde muy claro */
+    }
+</style>

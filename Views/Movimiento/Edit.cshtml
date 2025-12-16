@@ -1,0 +1,81 @@
+﻿@model Cuentas.Models.Movimiento
+
+@{
+    ViewData["Title"] = "Editar Movimiento";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow-lg border-secondary">
+                <div class="card-header bg-secondary text-white">
+                    <h1 class="h4 mb-0">Editar Movimiento</h1>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-muted">Ajuste de Detalles del Movimiento</h5>
+                    <hr />
+
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="mb-3">
+                            <label asp-for="Tipo" class="form-label fw-bold"></label>
+                            @{
+           
+                                string tipoTexto = Model.Tipo == 1 ? "Depósito (Crédito)" : (Model.Tipo == 2 ? "Retiro (Débito)" : "Desconocido");
+                            }
+                            <input value="@tipoTexto" class="form-control" readonly />
+                            <input type="hidden" asp-for="Tipo" />
+                            <span class="form-text text-muted">El tipo de movimiento no se puede cambiar.</span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Concepto" class="form-label fw-bold text-dark"></label>
+                            <input asp-for="Concepto" class="form-control" />
+                            <span asp-validation-for="Concepto" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Monto" class="form-label fw-bold"></label>
+                            <input asp-for="Monto" class="form-control text-end" readonly />
+                            <input type="hidden" asp-for="Monto" />
+                            <span class="form-text text-muted">El monto de la transacción no se puede modificar.</span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Fecha" class="form-label fw-bold"></label>
+                            <input asp-for="Fecha" class="form-control" readonly />
+                            <input type="hidden" asp-for="Fecha" />
+                            <span class="form-text text-muted">Fecha y hora de registro original.</span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="IdCuenta" class="form-label fw-bold"></label>
+                            <input asp-for="IdCuenta" class="form-control" readonly />
+                            <input type="hidden" asp-for="IdCuenta" />
+                            <span class="form-text text-muted">ID de la cuenta asociada.</span>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <input type="submit" value="Guardar Concepto" class="btn btn-primary btn-lg" />
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-footer bg-light">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Regresar a la Lista
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

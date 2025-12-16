@@ -1,0 +1,75 @@
+﻿@model Cuentas.Models.Movimiento
+
+@{
+    ViewData["Title"] = "Registrar Movimiento";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow-lg border-success">
+                <div class="card-header bg-success text-white">
+                    <h1 class="h4 mb-0">Registrar Nuevo Movimiento</h1>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-muted">Complete los detalles de la transacción</h5>
+                    <hr />
+
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="IdCuenta" class="form-label fw-bold"></label>
+                            <input asp-for="IdCuenta" class="form-control" placeholder="Ingrese el ID de la Cuenta afectada" />
+                            <span asp-validation-for="IdCuenta" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Tipo" class="form-label fw-bold"></label>
+                            <select asp-for="Tipo" class="form-select">
+                                <option value="" selected disabled>Seleccione el Tipo de Transacción</option>
+                                <option value="1">1 - Depósito (Crédito)</option>
+                                <option value="2">2 - Retiro (Débito)</option>
+                            </select>
+                            <span asp-validation-for="Tipo" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Monto" class="form-label fw-bold"></label>
+                            <input asp-for="Monto" class="form-control" placeholder="Ingrese el monto del movimiento" />
+                            <span asp-validation-for="Monto" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Concepto" class="form-label fw-bold"></label>
+                            <input asp-for="Concepto" class="form-control" placeholder="Descripción breve del movimiento" />
+                            <span asp-validation-for="Concepto" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Fecha" class="form-label fw-bold"></label>
+                            <input asp-for="Fecha" type="datetime-local" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                            <span asp-validation-for="Fecha" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <input type="submit" value="Registrar Movimiento" class="btn btn-success btn-lg" />
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-footer bg-light">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Regresar a la Lista
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

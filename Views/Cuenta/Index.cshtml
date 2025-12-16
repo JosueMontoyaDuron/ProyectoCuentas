@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Cuentas.Models.Cuenta>
+
+@{
+    ViewData["Title"] = "Lista de Cuentas";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="display-5 text-secondary">Lista de Cuentas</h1>
+        <a asp-action="Create" class="btn btn-success btn-lg shadow-sm">
+            <i class="bi bi-plus-circle-fill"></i> Crear Nueva Cuenta
+        </a>
+    </div>
+
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-hover table-striped table-bordered align-middle">
+            <thead class="table-light border-bottom border-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.numero)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.descripcion)
+                    </th>
+                    <th class="text-end">
+                        @Html.DisplayNameFor(model => model.creditos)
+                    </th>
+                    <th class="text-end">
+                        @Html.DisplayNameFor(model => model.debitos)
+                    </th>
+                    <th class="text-end">
+                        @Html.DisplayNameFor(model => model.balance)
+                    </th>
+                    <th>
+                        Estado
+                    </th>
+                    <th class="text-center">
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="@(item.balance < 0 ? "table-secondary" : "")">
+                        <td>
+                            <span class="badge bg-dark">@Html.DisplayFor(modelItem => item.numero)</span>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.descripcion)
+                        </td>
+                        <td class="text-end">
+                            <span class="fw-bold">@Html.DisplayFor(modelItem => item.creditos)</span>
+                        </td>
+                        <td class="text-end">
+                            @Html.DisplayFor(modelItem => item.debitos)
+                        </td>
+                        <td class="text-end">
+                            <span class="badge bg-info text-dark">@Html.DisplayFor(modelItem => item.balance)</span>
+                        </td>
+                        <td>
+                            @if (item.balance < 0)
+                            {
+                                <span class="badge bg-danger">Inactivo</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">Activo</span>
+                            }
+                        </td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm" role="group">
+
+                                @if (item.balance < 0)
+                                {
+                                    <span class="btn btn-sm btn-primary disabled" aria-disabled="true" title="No se puede editar una cuenta inactiva">
+                                        <i class="bi bi-pencil"></i> Editar
+                                    </span>
+                                }
+                                else
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">
+                                        <i class="bi bi-pencil"></i> Editar
+                                    </a>
+                                }
+
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info text-white">
+                                    <i class="bi bi-info-circle"></i> Detalles
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">
+                                    <i class="bi bi-trash"></i> Eliminar
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

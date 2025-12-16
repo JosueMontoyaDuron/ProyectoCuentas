@@ -1,0 +1,72 @@
+﻿@model Cuentas.Models.Cuenta
+
+@{
+    ViewData["Title"] = "Editar Cuenta";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-secondary">
+                <div class="card-header bg-secondary text-white">
+                    <h1 class="h4 mb-0">Editar Cuenta</h1>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-dark">Solo la descripción es editable</h5>
+                    <hr />
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="mb-3">
+                            <label asp-for="numero" class="form-label fw-bold"></label>
+                            <input asp-for="numero" class="form-control" readonly />
+                            <span class="form-text text-muted">Este campo no se puede modificar.</span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="descripcion" class="form-label fw-bold text-success"></label>
+                            <input asp-for="descripcion" class="form-control border-success border-2" />
+                            <span asp-validation-for="descripcion" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="creditos" class="form-label fw-bold"></label>
+                            <input asp-for="creditos" class="form-control" readonly />
+                            <span class="form-text text-muted">Este campo no se puede modificar.</span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="debitos" class="form-label fw-bold"></label>
+                            <input asp-for="debitos" class="form-control" readonly />
+                            <span class="form-text text-muted">Este campo no se puede modificar.</span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="balance" class="form-label fw-bold"></label>
+                            <input asp-for="balance" class="form-control" readonly />
+                            <span class="form-text text-muted">Este campo se calcula automáticamente.</span>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <input type="submit" value="Guardar Cambios" class="btn btn-primary btn-lg" />
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-footer bg-light">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Regresar a la Lista
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

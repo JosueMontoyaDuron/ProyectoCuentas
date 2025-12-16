@@ -1,0 +1,67 @@
+﻿@model Cuentas.Models.Cuenta
+
+@{
+    ViewData["Title"] = "Detalles de la Cuenta";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-secondary">
+                <div class="card-header bg-secondary text-white">
+                    <h1 class="h4 mb-0">Detalles de la Cuenta</h1>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-dark">Información de la Cuenta: @Html.DisplayFor(model => model.numero)</h5>
+                    <hr />
+
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4 text-start fw-bold text-muted">
+                            @Html.DisplayNameFor(model => model.numero)
+                        </dt>
+                        <dd class="col-sm-8 text-end">
+                            <span class="badge bg-dark fs-6">@Html.DisplayFor(model => model.numero)</span>
+                        </dd>
+
+                        <dt class="col-sm-4 text-start fw-bold text-muted">
+                            @Html.DisplayNameFor(model => model.descripcion)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.descripcion)
+                        </dd>
+
+                        <dt class="col-sm-4 text-start fw-bold text-muted">
+                            @Html.DisplayNameFor(model => model.creditos)
+                        </dt>
+                        <dd class="col-sm-8 text-end text-success fw-bold">
+                            @Html.DisplayFor(model => model.creditos)
+                        </dd>
+
+                        <dt class="col-sm-4 text-start fw-bold text-muted">
+                            @Html.DisplayNameFor(model => model.debitos)
+                        </dt>
+                        <dd class="col-sm-8 text-end text-danger fw-bold">
+                            @Html.DisplayFor(model => model.debitos)
+                        </dd>
+
+                        <dt class="col-sm-4 text-start fw-bold text-muted border-top pt-2 mt-2">
+                            @Html.DisplayNameFor(model => model.balance)
+                        </dt>
+                        <dd class="col-sm-8 text-end border-top pt-2 mt-2">
+                            <span class="badge bg-info text-dark fs-6">@Html.DisplayFor(model => model.balance)</span>
+                        </dd>
+                    </dl>
+                </div>
+
+                <div class="card-footer bg-light d-flex justify-content-between">
+                    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">
+                        <i class="bi bi-pencil"></i> Editar
+                    </a>
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Regresar a la Lista
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

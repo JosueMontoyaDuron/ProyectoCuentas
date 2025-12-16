@@ -1,0 +1,69 @@
+﻿@model Cuentas.Models.Cuenta
+
+@{
+    ViewData["Title"] = "Crear";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-dark">
+                <div class="card-header bg-secondary text-white">
+                    <h1 class="h4 mb-0">Crear Cuenta</h1>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-dark">Detalles de la Cuenta</h5>
+                    <hr />
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="numero" class="form-label fw-bold"></label>
+                            <input asp-for="numero" class="form-control" placeholder="Ingrese el número de cuenta" />
+                            <span asp-validation-for="numero" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="descripcion" class="form-label fw-bold"></label>
+                            <input asp-for="descripcion" class="form-control" placeholder="Ingrese una descripción" />
+                            <span asp-validation-for="descripcion" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="creditos" class="form-label fw-bold"></label>
+                            <input asp-for="creditos" class="form-control" type="number" step="0.01" />
+                            <span asp-validation-for="creditos" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="debitos" class="form-label fw-bold"></label>
+                            <input asp-for="debitos" class="form-control" type="number" step="0.01" />
+                            <span asp-validation-for="debitos" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="balance" class="form-label fw-bold"></label>
+                            <input asp-for="balance" class="form-control" type="number" step="0.01" />
+                            <span asp-validation-for="balance" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <input type="submit" value="Crear" class="btn btn-success btn-lg" />
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-muted bg-light">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Regresar a la Lista
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
